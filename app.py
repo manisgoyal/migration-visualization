@@ -76,7 +76,7 @@ def update_figure(year, source, destination):
         fig = go.Figure()
         if filtered_df.empty:
             fig.update_layout(
-                height=2000,
+                height=800,
                 title_text='Nothing Matches your Query',
                 geo_scope='world'
             )
@@ -338,12 +338,14 @@ def update_figure(year, source, destination):
         filtered_df = df[(df['Year'] == year) & (
             df['Target'] == destination) & (df['Source'] == source)]
         if filtered_df.empty:
+            fig = go.Figure()
             fig.add_trace(go.Scattergeo(locationmode='ISO-3'))
             fig.update_layout(
-                height=2000,
+                height=800,
                 title_text='Nothing Matches your Query',
                 geo_scope='world'
             )
+            return fig
         else:
             fig.add_trace(go.Scattergeo(
                 locationmode='ISO-3',
